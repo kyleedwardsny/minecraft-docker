@@ -1,0 +1,34 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <config>"
+  exit 1
+fi
+
+config_file=$1
+if [ ! -e $config_file ]; then
+  echo "Config file not found"
+  exit 1
+fi
+. $config_file
+
+if [ -z "$MINECRAFT_JAR_FILE" ]; then
+  echo "MINECRAFT_JAR_FILE not specified"
+  exit 1
+fi
+
+if ! grep -q '^eula=true$' eula.txt 2> /dev/null; then
+  if dialog --yesno 'By selecting "yes" below you are indicating your agreement to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula).' 0 0; then
+    echo 'eula=true' > eula.txt
+  else
+    echo 'EULA not accepted. Aborting.'
+    exit 1
+  fi
+fi
+
+while true; do
+  if java $MINECRAFT_JAVA_ARGS -jar $MINECRAFT_JAR_FILE nogui; then
+    break
+  fi
+  echo "Minecraft exited unexpectedly! Restarting" >&2
+done
