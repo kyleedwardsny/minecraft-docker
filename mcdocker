@@ -26,9 +26,4 @@ if ! grep -q '^eula=true$' eula.txt 2> /dev/null; then
   fi
 fi
 
-while true; do
-  if java $MINECRAFT_JAVA_ARGS -jar $MINECRAFT_JAR_FILE nogui; then
-    break
-  fi
-  echo "Minecraft exited unexpectedly! Restarting" >&2
-done
+java $MINECRAFT_JAVA_ARGS -jar $MINECRAFT_JAR_FILE nogui
