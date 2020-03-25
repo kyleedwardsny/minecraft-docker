@@ -6,7 +6,10 @@ EXPOSE 25565
 # Install Java
 RUN apt-get update && \
   apt-get dist-upgrade -y && \
-  apt-get install -y openjdk-8-jre dialog
+  apt-get install -y \
+    openjdk-8-jre \
+    dialog \
+    screen
 
 # Create Minecraft user
 RUN useradd -m -s /bin/bash minecraft

@@ -26,4 +26,4 @@ if ! grep -q '^eula=true$' eula.txt 2> /dev/null; then
   fi
 fi
 
-java $MINECRAFT_JAVA_ARGS -jar $MINECRAFT_JAR_FILE nogui
+screen java $MINECRAFT_JAVA_ARGS -jar $MINECRAFT_JAR_FILE nogui
