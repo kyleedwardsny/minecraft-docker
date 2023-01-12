@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 # Expose Minecraft port
 EXPOSE 25565
@@ -7,7 +7,7 @@ EXPOSE 25565
 RUN apt-get update && \
   apt-get dist-upgrade -y && \
   apt-get install -y \
-    openjdk-8-jre \
+    openjdk-17-jre \
     dialog \
     screen
 
